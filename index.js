@@ -12,8 +12,10 @@ const punks = JSON.parse(/all_punks\s*=\s*(\[.+?])/gms.exec(text)[1]);
 const atomicals = JSON.parse(/punk_atomicals\s*=\s*(\[.+?])/gms.exec(text)[1]);
 
 const atomicalsMap = {};
+let maxAtomicalNumber = 0;
 for (const atomical of atomicals) {
     atomicalsMap[atomical.punk_id] = atomical;
+    maxAtomicalNumber = Math.max(maxAtomicalNumber, atomical.atomical_number);
 }
 
 const newPunks = [];
@@ -28,7 +30,12 @@ for (const punk of punks) {
 }
 
 const list = newPunks.sort((a, b) => parseInt(a.pi) - parseInt(b.pi));
-const json = JSON.stringify(list, (_, v) => v === undefined ? undefined : v);
+const json = JSON.stringify({
+    list,
+    last: maxAtomicalNumber,
+    minted: atomicals.length,
+}, (_, v) => v === undefined ? undefined : v);
 
 fs.mkdirSync('dist', {recursive: true});
 fs.writeFileSync('dist/punks.json', json, 'utf8');
+fs.writeFileSync('dist/v.json', `{"v":${Date.now()}}`, 'utf8')
