@@ -1,0 +1,13 @@
+{
+  "name": "atom-punks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "newpunks": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
