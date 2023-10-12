@@ -30,4 +30,5 @@ for (const punk of punks) {
 const list = newPunks.sort((a, b) => parseInt(a.pi) - parseInt(b.pi));
 const json = JSON.stringify(list, (_, v) => v === undefined ? undefined : v);
 
-fs.writeFileSync('punks.json', json, 'utf8');
+fs.mkdirSync('dist', {recursive: true});
+fs.writeFileSync('dist/punks.json', json, 'utf8');
