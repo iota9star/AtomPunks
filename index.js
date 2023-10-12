@@ -7,9 +7,8 @@ function toBase64Url(hex) {
     return "data:image/png;base64," + base64;
 }
 
-const text = fs.readFileSync('index.html', 'utf8');
-const punks = JSON.parse(/all_punks\s*=\s*(\[.+?])/gms.exec(text)[1]);
-const atomicals = JSON.parse(/punk_atomicals\s*=\s*(\[.+?])/gms.exec(text)[1]);
+const punks = JSON.parse(fs.readFileSync('10kpunk_data.json', 'utf8'));
+const atomicals = JSON.parse(fs.readFileSync('atompunk_data_list_v0.json', 'utf8'));
 
 const atomicalsMap = {};
 let maxAtomicalNumber = 0;
