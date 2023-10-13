@@ -6,11 +6,6 @@ from urllib3.util.retry import Retry
 MAX_RETRY = 3
 RETRY_DELAY = 1
 
-# 獲取存儲庫的根目錄
-script_dir = os.path.dirname(__file__)
-repository_root = os.path.join(script_dir, "..", "..")
-json_file_path = os.path.join(repository_root, "atompunk_data_list_v0.json")
-
 def process_atompunks_data_list_v0(filename):
     # 读取JSON文件
     with open(filename, 'r') as file:
@@ -42,6 +37,8 @@ def process_atompunks_data_list_v0(filename):
         json.dump(new_data, file, indent=4)
         print("[Remove duplicate objects] atompunk_data_list_v0.json")
 
+
+
 # 递归函数来查找所需的值
 def find_value(data, target_key):
     if isinstance(data, dict):
@@ -57,6 +54,7 @@ def find_value(data, target_key):
             result = find_value(item, target_key)
             if result is not None:
                 return result
+
 
 def get_data_from_url(number):
     url = f"https://ep.atomicals.xyz/proxy/blockchain.atomicals.get?params=[{number}]&pretty"
@@ -86,10 +84,12 @@ def process_data(start_number, end_number, existing_data_file, v0_file):
         with open(existing_data_file, 'r') as existing_file:
             existing_data = json.load(existing_file)
     
+
     if os.path.exists(v0_file):
         with open(v0_file, 'r') as v0_file_obj:
             v0_data = json.load(v0_file_obj)
     
+
     result_list = []
 
     for number in range(start_number, end_number):
@@ -137,6 +137,7 @@ def process_data(start_number, end_number, existing_data_file, v0_file):
         json.dump(v0_data, v0_file_obj, indent=4)
         print("[Update Finished] atompunk_data_list_v0.json")
 
+
 def get_atomical_count():
     url = "https://ep.atomicals.xyz/proxy/blockchain.atomicals.list?params=%5B1,-1,0%5D"
 
@@ -167,8 +168,9 @@ def get_last_atomical_number(filename):
         print(f"Error while getting last atomical number: {e}")
         return None
 
+
 def process_data_sync():
-    last_atomical_number = get_last_atomical_number(json_file_path)
+    last_atomical_number = get_last_atomical_number("atompunk_data_list_v0.json")
 
     if last_atomical_number is not None:
         # 设置start_number为最后一个元素的"atomical_number"值
@@ -181,11 +183,13 @@ def process_data_sync():
         if end_number is not None:
             # 使用获取的start_number和end_number进行进一步处理
             existing_data_file = "10kpunk_data.json"
-            v0_file = json_file_path
+            v0_file = "atompunk_data_list_v0.json"
             process_data(start_number, end_number, existing_data_file, v0_file)
             # 使用函数处理 JSON 文件
             process_atompunks_data_list_v0(v0_file)
 
+
 if __name__ == "__main__":
     process_data_sync()
     print("UpdatePunkList.py 执行完成")
+  
