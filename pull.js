@@ -1,5 +1,6 @@
 import shell from 'shelljs';
 import chalk from "chalk";
+import ora from "ora";
 
 if (!shell.which('git')) {
     shell.echo('Sorry, this script requires git');
@@ -22,5 +23,8 @@ while (true) {
     console.log(chalk.blue("Pushing to main..."));
     shell.exec("git push origin main")
 
+    const spinner = ora('Waiting...').start();
     await new Promise(r => setTimeout(r, 60 * 1000));
+    spinner.stop();
+    console.log("\n===============================\n");
 }
