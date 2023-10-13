@@ -8,6 +8,8 @@ if (!shell.which('git')) {
 }
 
 while (true) {
+    console.log(chalk.blue("Start at " + new Date().toLocaleString() + "\n"));
+
     console.log(chalk.blue("Pulling from main..."));
     shell.exec("git pull origin main")
 
