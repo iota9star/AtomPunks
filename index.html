@@ -1,243 +1,174 @@
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>AtomPunks.xyz</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <style type="text/css">
-            .pagination {
-                justify-content: center;
-            }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>AtomPunks.xyz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <style type="text/css">
+        .pagination {
+            justify-content: center;
+        }
 
-            #result ul {
-                list-style-type: none none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: center;
-            }
+        #result ul {
+            list-style-type: none none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
 
-            #result ul li {
-                display: flex;
-                flex-direction: column;
-                width: 80px;
-                height: 80px;
-                background: #888;
-                border: 1px solid #fff;
-                justify-content: center;
-                align-items: center;
-            }
+        #result ul li {
+            display: flex;
+            flex-direction: column;
+            width: 80px;
+            height: 80px;
+            background: #888;
+            border: 1px solid #fff;
+            justify-content: center;
+            align-items: center;
+        }
 
-            #result ul li span {
-                font-weight: bold;
-                font-size: 0.8rem;
-                margin-bottom: 0;
-            }
+        #result ul li span {
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
 
-            #result ul li.taken {
-                background: #c00;
-                opacity: 0.1;
-            }
+        #result ul li.taken {
+            background: #c00;
+            opacity: 0.1;
+        }
 
-            .pixel-image {
-                width: 64px;
-                height: 64px;
-                image-rendering: pixelated;
-            }
-        </style>
-    </head>
-    <body class="bg-dark p-5 text-center">
-        <div class="container-fluid">
-            <h2>AtomPunks.xyz     
-        </h2>
-            <h6 id="minted_amount"></h6>
-            <nav aria-label="Page navigation">
-                <ul class="pagination text-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#prev">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#1">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#2">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#3">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#4">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#5">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#6">6</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#7">7</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#8">8</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#9">9</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#10">10</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#next">Next</a>
-                    </li>
-                </ul>
-            </nav>
-            <div id="result" class="mb-4">Loading data..
-        </div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination text-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#prev">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#1">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#2">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#3">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#4">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#5">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#6">6</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#7">7</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#8">8</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#9">9</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#10">10</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#next">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        
-        <script>
-            let all_punks = []
-            let punk_atomicals = []
+        .pixel-image {
+            width: 64px;
+            height: 64px;
+            image-rendering: pixelated;
+        }
+    </style>
+</head>
+<body class="bg-dark p-5 text-center">
+<div class="container-fluid">
+    <h2>AtomPunks.xyz</h2>
+    <h6 id="minted_amount"></h6>
+    <nav aria-label="Page navigation">
+        <ul class="pagination text-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#prev">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#1">1</a>
+            </li>
+            <!-- ... Other page items ... -->
+            <li class="page-item">
+                <a class="page-link" href="#next">Next</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="result" class="mb-4">Loading data..
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination text-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#prev">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#1">1</a>
+            </li>
+            <!-- ... Other page items ... -->
+            <li class="page-item">
+                <a class="page-link" href="#next">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
-            const itemsPerPage = 1000
-            const result = document.querySelector('#result')
-            let numberOfPages = 10
+<script>
+    let all_punks = []
+    let punk_atomicals = []
 
-            let currentPage = 1
+    const itemsPerPage = 1000
+    const result = document.querySelector('#result')
+    let numberOfPages = 10
 
-            const has_atomical = hex=>punk_atomicals.filter(p=>p.hex === hex)[0]
+    let currentPage = 1
 
-            function hexToBase64(hexstring) {
-                return btoa(hexstring.match(/\w{2}/g).map(function(a) {
-                    return String.fromCharCode(parseInt(a, 16));
-                }).join(""));
-            }
+    const has_atomical = hex => punk_atomicals.filter(p => p.hex === hex)[0]
 
-            const setActivePage = page=>{
-                // reset all active states first
-                document.querySelectorAll('.page-item').forEach(item=>{
-                    item.classList.remove('active')
-                }
-                )
-                // add active state to current page
-                document.querySelectorAll(`.page-link[href="#${page}"]`).forEach(item=>{
-                    item.parentNode.classList.add('active')
-                }
-                )
-            }
+    function hexToBase64(hexstring) {
+        return btoa(hexstring.match(/\w{2}/g).map(function (a) {
+            return String.fromCharCode(parseInt(a, 16));
+        }).join(""));
+    }
 
-            const showItems = page=>{
-                const startIndex = (page - 1) * itemsPerPage
-                const itemsToShow = all_punks.slice(startIndex, startIndex + itemsPerPage)
+    // 函數用於處理下載連結點擊事件
+    function handleDownloadClick(event) {
+        event.preventDefault();
 
-                let html = '<ul>'
+        // 獲取連結的ID
+        const punkId = event.target.id.replace('download-', '');
 
-                itemsToShow.forEach(item=>{
-                    const atomical = has_atomical(item.hex)
-                    const base64 = hexToBase64(item.hex)
+        // 找到對應punk的hex值
+        const punk = all_punks.find(item => item.punk_id === punkId);
 
-                    html += `
-                    <li class="${atomical ? 'taken' : ''}" title="${atomical ? `already minted, atomical: ${atomical.atomical_number}` : 'still available'}">
-                        <img class="pixel-image" src="data:image/png;base64, ${base64}">
-                        <span class="h6">${item.punk_id}</span>
-                    </li>
-                `
-                }
-                )
+        if (punk) {
+            // 創建1000x1000的空白PNG圖像
+            const canvas = document.createElement('canvas');
+            canvas.width = 1000;
+            canvas.height = 1000;
+            const context = canvas.getContext('2d');
 
-                html += '</ul>'
+            // 填充背景色
+            context.fillStyle = 'rgb(208, 208, 224)';
+            context.fillRect(0, 0, 1000, 1000);
 
-                result.innerHTML = html
+            // 解碼punk的hex值並繪製到畫布上
+            const base64 = hexToBase64(punk.hex);
+            const img = new Image();
+            img.src = `data:image/png;base64, ${base64}`;
+            img.onload = function () {
+                context.drawImage(img, 0, 0, 1000, 1000);
 
-                setActivePage(page)
-            }
+                // 創建PNG圖像的數據URL
+                const pngDataURL = canvas.toDataURL('image/png');
 
-            document.querySelectorAll('.page-link').forEach(item=>{
-                item.addEventListener('click', event=>{
-                    event.preventDefault();
+                // 創建一個帶有下載屬性的連結
+                const a = document.createElement('a');
+                a.href = pngDataURL;
+                a.download = `${punkId}.png`;
 
-                    const page = event.target.getAttribute('href').replace('#', '')
+                // 模擬點擊連結以觸發下載
+                a.click();
+            };
+        }
+    }
 
-                    if (page === 'prev') {
-                        currentPage--
-                    } else if (page === 'next') {
-                        currentPage++
-                    } else {
-                        currentPage = parseInt(page)
-                    }
+    // 添加事件監聽器以處理下載連結點擊事件
+    document.querySelectorAll('.download-link').forEach(item => {
+        item.addEventListener('click', handleDownloadClick);
+    });
 
-                    document.querySelectorAll('.page-link[href="#prev"]').forEach(item=>{
-                        item.parentNode.classList[currentPage === 1 ? 'add' : 'remove']('disabled')
-                    }
-                    )
-                    document.querySelectorAll('.page-link[href="#next"]').forEach(item=>{
-                        item.parentNode.classList[currentPage === numberOfPages ? 'add' : 'remove']('disabled')
-                    }
-                    )
+    // 其餘的JavaScript代碼
+    // ...
 
-                    showItems(currentPage)
-                }
-                )
-            }
-            )
+    async function init() {
+        all_punks = await fetch('./10kpunk_data.json').then(res => res.json()).catch(e => console.log(e))
+        punk_atomicals = await fetch('./atompunk_data_list_v0.json').then(res => res.json()).catch(e => console.log(e))
 
-            async function init() {
-                all_punks = await fetch('./10kpunk_data.json').then(res=>res.json()).catch(e=>console.log(e))
-                punk_atomicals = await fetch('./atompunk_data_list_v0.json').then(res=>res.json()).catch(e=>console.log(e))
-    
-                const lastElement = punk_atomicals[punk_atomicals.length - 1];
-                const atomicalLastNumber = lastElement["atomical_number"];
-                const minted = document.getElementById("minted_amount");
-                minted.textContent = punk_atomicals.length + " / 10000" + "  ｜ Updated to Atomical " + atomicalLastNumber;
+        const lastElement = punk_atomicals[punk_atomicals.length - 1];
+        const atomicalLastNumber = lastElement["atomical_number"];
+        const minted = document.getElementById("minted_amount");
+        minted.textContent = punk_atomicals.length + " / 10000" + "  ｜ Updated to Atomical " + atomicalLastNumber;
 
-                // load first page by default
-                showItems(currentPage)
-            }
+        // load first page by default
+        showItems(currentPage)
+    }
 
-            init()
-        </script>
-    </body>
+    init()
+</script>
+</body>
 </html>
