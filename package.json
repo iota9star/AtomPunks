@@ -5,9 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "newpunks": "node index.js"
+    "newpunks": "node index.js",
+    "pull": "node pull.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "shelljs": "^0.8.5",
+    "chalk": "^5.3.0"
+  }
 }
