@@ -1,31 +1,24 @@
-name: Update AtomPunks Data
+name: 自動更新數據
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # 设置定时执行的时间
+    - cron: '*/10 * * * *'  # 設定每10分鐘運行一次
 
 jobs:
-  update_data:
+  update-data:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: 檢出代碼
       uses: actions/checkout@v2
 
-    - name: Upgrade pip
-      run: pip install --upgrade pip
-
-    - name: Clear pip cache
-      run: pip cache purge
-
-    - name: Set up Python
+    - name: 安裝Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x # 设置所需的Python版本
+        python-version: '3.x'  # 選擇Python版本，例如'3.8'或'3.9'
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt  # 如果有依赖需求，请修改成相应的命令
+    - name: 安裝依賴
+      run: pip install -r requirements.txt  # 如果有requirements.txt文件的話，可以在這裡安裝相關依賴
 
-    - name: Execute UpdatePunkList.py
-      run: |
-        python UpdatePunkList.py || (echo "UpdatePunkList.py failed" && exit 1)
+    - name: 運行UpdatePunkList.py
+      run: python UpdatePunkList.py
