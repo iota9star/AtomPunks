@@ -29,6 +29,7 @@
                 border: 1px solid #fff;
                 justify-content: center;
                 align-items: center;
+                position: relative;
             }
 
             #result ul li span {
@@ -41,6 +42,21 @@
                 background: #c00;
                 opacity: 0.1;
             }
+
+            #result ul li .pfp {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: black;
+                color: white;
+                font-size: 10px;
+                padding: 2px 3px;
+                text-decoration: none;
+            }
+
+            #result ul li .pfp:hover {
+                text-decoration: underline;
+            } 
 
             .pixel-image {
                 width: 64px;
@@ -137,7 +153,7 @@
                 </ul>
             </nav>
         </div>
-        
+
         <script>
             let all_punks = []
             let punk_atomicals = []
@@ -183,6 +199,7 @@
                     <li class="${atomical ? 'taken' : ''}" title="${atomical ? `already minted, atomical: ${atomical.atomical_number}` : 'still available'}">
                         <img class="pixel-image" src="data:image/png;base64, ${base64}">
                         <span class="h6">${item.punk_id}</span>
+                        <a href="https://cryptopunks.app/cryptopunks/cryptopunk${item.punk_id}.png?size=1000&customColor=D0D0E0" class="pfp" target="_blank">pfp</a>
                     </li>
                 `
                 }
