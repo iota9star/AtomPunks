@@ -20,5 +20,5 @@ jobs:
     - name: 安裝依賴
       run: pip install -r requirements.txt  # 如果有requirements.txt文件的話，可以在這裡安裝相關依賴
 
-    - name: 運行UpdatePunkList.py
-      run: python UpdatePunkList.py
+    - name: 運行test.py
+      run: python .github/workflows/test.py
