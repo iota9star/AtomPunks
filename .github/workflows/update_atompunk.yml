@@ -12,6 +12,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Clear pip cache
+      run: pip cache purge
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -21,4 +24,5 @@ jobs:
       run: pip install -r requirements.txt  # 如果有依赖需求，请修改成相应的命令
 
     - name: Execute UpdatePunkList.py
-      run: python UpdatePunkList.py
+      run: |
+        python UpdatePunkList.py || (echo "UpdatePunkList.py failed" && exit 1)
